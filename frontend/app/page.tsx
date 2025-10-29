@@ -1,6 +1,5 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
-import SearchSection from "@/components/search-section"
 import Banner from "@/components/banner"
 import Destinations from "@/components/destinations"
 import TravelTips from "@/components/travel-tips"
@@ -15,7 +14,6 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <SearchSection />
         <Banner />
         <Destinations />
         <TravelTips />
