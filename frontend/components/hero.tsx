@@ -18,18 +18,6 @@ export default function Hero() {
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           Explore the World's Magnificent Landscapes
         </h1>
-        <p className="mt-6 max-w-2xl text-lg">
-          From ancient wonders to modern marvels, discover the world's most beautiful
-          attractions and unique cultural experiences with Tripscape
-        </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <Button size="lg" className="bg-rose-600 hover:bg-rose-700">
-            Start Planning
-          </Button>
-          <Button size="lg" variant="outline" className="border-white text-white bg-white/10 hover:bg-white/30">
-            Learn More
-          </Button>
-        </div>
       </div>
     </section>
   )
