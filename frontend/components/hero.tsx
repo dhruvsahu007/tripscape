@@ -8,7 +8,7 @@ export default function Hero() {
       <div className="relative h-[600px] w-full">
         <Image
           src="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=1920&auto=format&fit=crop"
-          alt="Great Wall of China landscape"
+          alt="Beautiful travel destination landscape"
           fill
           className="object-cover"
           priority

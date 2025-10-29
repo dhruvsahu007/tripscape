@@ -38,15 +38,15 @@ export default function ContactForm() {
           <div className="mt-8 space-y-4">
             <div className="flex items-center gap-4">
               <MapPin className="h-5 w-5 text-rose-600" />
-              <p>Mumbai, Andheri East, Western Express Highway</p>
+              <p>Beijing, Chaoyang District, Jianguomenwai Avenue 1</p>
             </div>
             <div className="flex items-center gap-4">
               <Phone className="h-5 w-5 text-rose-600" />
-              <p>+91 22 1234 5678</p>
+              <p>+86 10 1234 5678</p>
             </div>
             <div className="flex items-center gap-4">
               <Mail className="h-5 w-5 text-rose-600" />
-              <p>info@tripscape.com</p>
+              <p>info@chinatravel.com</p>
             </div>
           </div>
         </div>

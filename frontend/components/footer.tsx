@@ -113,21 +113,36 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-medium">Resources</h3>
+            <h3 className="text-lg font-medium">Links</h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-rose-600">
-                  Travel Blog
+                <Link
+                  href="https://ai.dreamthere.cn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-rose-600"
+                >
+                  AI Navigation
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-rose-600">
-                  FAQs
+                <Link
+                  href="https://qiqu.dreamthere.cn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-rose-600"
+                >
+                  Interesting Sites
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-muted-foreground hover:text-rose-600">
-                  Support
+                <Link
+                  href="https://nav.dreamthere.cn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-rose-600"
+                >
+                  Dream Navigation
                 </Link>
               </li>
             </ul>
