@@ -17,16 +17,19 @@ export default function Header() {
           <span className="text-xl font-bold">Tripscape</span>
         </Link>
         <nav className="hidden md:flex gap-6">
-          <Link href="#destinations" className="text-sm font-medium transition-colors hover:text-rose-600">
+          <Link href="/#destinations" className="text-sm font-medium transition-colors hover:text-rose-600">
             Destinations
           </Link>
-          <Link href="#tips" className="text-sm font-medium transition-colors hover:text-rose-600">
+          <Link href="/packages" className="text-sm font-medium transition-colors hover:text-rose-600">
+            Packages
+          </Link>
+          <Link href="/#tips" className="text-sm font-medium transition-colors hover:text-rose-600">
             Travel Tips
           </Link>
-          <Link href="#testimonials" className="text-sm font-medium transition-colors hover:text-rose-600">
+          <Link href="/#testimonials" className="text-sm font-medium transition-colors hover:text-rose-600">
             Reviews
           </Link>
-          <Link href="#contact" className="text-sm font-medium transition-colors hover:text-rose-600">
+          <Link href="/#contact" className="text-sm font-medium transition-colors hover:text-rose-600">
             Contact Us
           </Link>
         </nav>

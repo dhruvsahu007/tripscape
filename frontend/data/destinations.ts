@@ -1,32 +1,32 @@
 export const destinationsData = [
   {
-    name: "Mumbai",
-    description: "Explore the vibrant metropolis and gateway to India's rich culture",
-    image: "https://images.unsplash.com/photo-1592063670577-837fa649cefe?q=80&w=300&auto=format&fit=crop",
-  },
-  {
-    name: "Delhi",
-    description: "Experience the historical landmarks and modern charm of India's capital",
-    image: "https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?q=80&w=300&auto=format&fit=crop",
-  },
-  {
-    name: "Jaipur",
-    description: "Discover the Pink City and explore magnificent palaces and forts",
-    image: "https://images.unsplash.com/photo-1617470464957-55fc5a6f2894?q=80&w=300&auto=format&fit=crop",
-  },
-  {
-    name: "Goa",
-    description: "Relax on beautiful beaches and experience the unique coastal culture",
-    image: "https://images.unsplash.com/photo-1537531383496-f4749b8032cf?q=80&w=300&auto=format&fit=crop",
+    name: "Dubai",
+    description: "Experience luxury shopping, desert safaris, and the iconic Burj Khalifa",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=300&auto=format&fit=crop",
   },
   {
     name: "Kerala",
-    description: "Experience serene backwaters and lush green landscapes of God's Own Country",
-    image: "https://images.unsplash.com/photo-1545293527-e26058c5b48b?q=80&w=300&auto=format&fit=crop",
+    description: "God's Own Country with serene backwaters, houseboats, and Ayurvedic spas",
+    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=300&auto=format&fit=crop",
   },
   {
-    name: "Agra",
-    description: "Visit the iconic Taj Mahal and explore Mughal architectural wonders",
-    image: "https://images.unsplash.com/photo-1536599424071-0b215a388ba7?q=80&w=300&auto=format&fit=crop",
+    name: "Ladakh",
+    description: "High-altitude adventure with Pangong Lake, Nubra Valley, and monasteries",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=300&auto=format&fit=crop",
+  },
+  {
+    name: "Rajasthan",
+    description: "Explore royal palaces, majestic forts, and heritage hotels in Pink City and beyond",
+    image: "https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=300&auto=format&fit=crop",
+  },
+  {
+    name: "Bhutan",
+    description: "Discover serene landscapes, ancient monasteries, and vibrant Himalayan culture",
+    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=300&auto=format&fit=crop",
+  },
+  {
+    name: "Himachal Pradesh",
+    description: "Snow-capped mountains, apple orchards, and peaceful hill stations",
+    image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=300&auto=format&fit=crop",
   },
 ]

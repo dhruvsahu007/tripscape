@@ -4,79 +4,91 @@ from typing import List, Dict, Optional
 import boto3
 from botocore.exceptions import ClientError
 
-# Mock packages for fallback
+# Tripscape Travel Packages - Actual Data
 MOCK_PACKAGES = [
     {
         "id": "pkg-001",
-        "name": "Bali Paradise Escape",
-        "destination": "Bali, Indonesia",
-        "price": 1299,
-        "dates": "July 15-22, 2025",
+        "name": "Exotic Dubai Escape",
+        "destination": "Dubai, UAE",
+        "price": 95999,
+        "dates": "Available year-round",
         "type": "tour",
-        "description": "7 nights in luxury resort, daily breakfast, guided tours",
+        "description": "5N/6D - Discover glitz and glamour with desert safaris, Burj Khalifa visits, and luxury shopping. Includes flights, 4-star hotel, meals, visa, city tours.",
+        "duration": "5 Nights / 6 Days",
+        "suitable_for": ["Couples", "Families", "Youth"],
+        "inclusions": ["Return flights", "4-star hotel", "Breakfast & dinner", "Visa assistance", "City tours", "Desert safari"],
     },
     {
         "id": "pkg-002",
-        "name": "European Grand Tour",
-        "destination": "Paris, Rome, Barcelona",
-        "price": 2499,
-        "dates": "August 10-20, 2025",
+        "name": "Bhutan Bliss Tour",
+        "destination": "Bhutan",
+        "price": 25999,
+        "dates": "Fixed departure: Nov 2, 2025",
         "type": "tour",
-        "description": "10 days exploring Europe's finest cities with all meals included",
+        "description": "6N/7D - Explore serene landscapes with Thimphu, Paro, and Phuntsholing. Ideal for cultural immersion. Includes 3-star hotels, all meals, guided tours.",
+        "duration": "6 Nights / 7 Days",
+        "suitable_for": ["Solo Travelers", "Families"],
+        "inclusions": ["3-star accommodation", "All meals", "Guided sightseeing", "Entry fees", "Transport"],
     },
     {
         "id": "pkg-003",
-        "name": "Maldives Honeymoon",
-        "destination": "Maldives",
-        "price": 3500,
-        "dates": "September 5-12, 2025",
-        "type": "hotel",
-        "description": "Overwater villa, all-inclusive, couples spa treatments",
+        "name": "Ladakh Adventure",
+        "destination": "Ladakh, India",
+        "price": 45000,
+        "dates": "May-September 2025",
+        "type": "tour",
+        "description": "7N/8D - High-altitude thrills in Leh with Pangong Lake, Nubra Valley, and monastery tours. Perfect for thrill-seekers. 4x4 vehicles included.",
+        "duration": "7 Nights / 8 Days",
+        "suitable_for": ["Adventure Seekers", "Youth"],
+        "inclusions": ["Accommodation", "Meals", "Inner line permits", "4x4 vehicles", "Sightseeing"],
     },
     {
         "id": "pkg-004",
-        "name": "Tokyo Adventure",
-        "destination": "Tokyo, Japan",
-        "price": 1899,
-        "dates": "October 1-8, 2025",
+        "name": "Kerala Backwaters",
+        "destination": "Kerala, India",
+        "price": 28500,
+        "dates": "October-March 2026",
         "type": "tour",
-        "description": "Cultural immersion, sushi making class, Mt. Fuji day trip",
+        "description": "4N/5D - Relax in God's Own Country with houseboat cruises, Ayurvedic spas, and wildlife sanctuaries. Romantic getaway with houseboat stay.",
+        "duration": "4 Nights / 5 Days",
+        "suitable_for": ["Couples", "Families"],
+        "inclusions": ["Houseboat stay", "Hotel accommodation", "Meals", "Houseboat cruise"],
     },
     {
         "id": "pkg-005",
-        "name": "Safari in Kenya",
-        "destination": "Maasai Mara, Kenya",
-        "price": 3200,
-        "dates": "November 15-23, 2025",
+        "name": "Rajasthan Royals",
+        "destination": "Rajasthan, India",
+        "price": 55000,
+        "dates": "October-March 2026",
         "type": "tour",
-        "description": "Big 5 safari, luxury tented camp, hot air balloon ride",
+        "description": "8N/9D - Journey through palaces and forts of Jaipur, Udaipur, and Jodhpur. History and heritage focus with heritage hotel stays.",
+        "duration": "8 Nights / 9 Days",
+        "suitable_for": ["History Buffs", "Families"],
+        "inclusions": ["Heritage hotels", "All meals", "Guided tours", "Train transfers"],
     },
     {
         "id": "pkg-006",
-        "name": "Swiss Alps Retreat",
-        "destination": "Interlaken, Switzerland",
-        "price": 2800,
-        "dates": "December 10-17, 2025",
+        "name": "Himachal Hill Retreat",
+        "destination": "Himachal Pradesh, India",
+        "price": 35000,
+        "dates": "Year-round",
         "type": "tour",
-        "description": "Skiing, mountain views, luxury chalet with spa",
+        "description": "6N/7D - Snow-capped mountains and apple orchards in Manali, Shimla, and Dharamshala. Nature escape with hill resort stays.",
+        "duration": "6 Nights / 7 Days",
+        "suitable_for": ["Nature Lovers", "Couples"],
+        "inclusions": ["Hill resort accommodation", "Meals", "Local transfers"],
     },
     {
         "id": "pkg-007",
-        "name": "Dubai Luxury Experience",
-        "destination": "Dubai, UAE",
-        "price": 2200,
-        "dates": "January 5-12, 2026",
-        "type": "hotel",
-        "description": "5-star hotel, desert safari, Burj Khalifa tickets included",
-    },
-    {
-        "id": "pkg-008",
-        "name": "Santorini Sunset Romance",
-        "destination": "Santorini, Greece",
-        "price": 1799,
-        "dates": "May 15-22, 2026",
+        "name": "Northeast Wonders",
+        "destination": "Northeast India",
+        "price": 60000,
+        "dates": "October-April 2026",
         "type": "tour",
-        "description": "Cliff-side villa, wine tours, sunset sailing cruise",
+        "description": "9N/10D - Vibrant cultures and tea gardens in Assam, Meghalaya, and Arunachal Pradesh. Offbeat exploration with luxury camps and tribal visits.",
+        "duration": "9 Nights / 10 Days",
+        "suitable_for": ["Explorers", "Groups"],
+        "inclusions": ["Luxury camps", "Meals", "Tribal village visits", "Sightseeing"],
     },
 ]
 
@@ -131,36 +143,52 @@ class ChatbotService:
         lower_message = message.lower()
         matched = MOCK_PACKAGES.copy()
         
-        # Filter by vibe/type
-        if any(word in lower_message for word in ["beach", "island", "tropical", "ocean"]):
-            matched = [p for p in matched if any(kw in p["name"].lower() or kw in p["description"].lower() 
-                      for kw in ["beach", "island", "bali", "maldives", "santorini"])]
-        elif any(word in lower_message for word in ["city", "cities", "urban", "cultural"]):
-            matched = [p for p in matched if any(kw in p["name"].lower() or kw in p["destination"].lower()
-                      for kw in ["city", "tokyo", "paris", "dubai", "european"])]
-        elif any(word in lower_message for word in ["adventure", "safari", "mountain", "ski"]):
-            matched = [p for p in matched if any(kw in p["description"].lower()
-                      for kw in ["safari", "adventure", "mountain", "ski"])]
-        elif any(word in lower_message for word in ["romantic", "honeymoon", "couple"]):
-            matched = [p for p in matched if any(kw in p["description"].lower()
-                      for kw in ["honeymoon", "romantic", "couple"])]
-        elif any(word in lower_message for word in ["luxury", "5-star", "premium"]):
-            matched = [p for p in matched if any(kw in p["description"].lower()
-                      for kw in ["luxury", "5-star", "premium", "villa"])]
+        # Filter by specific destinations
+        if any(word in lower_message for word in ["dubai", "uae", "emirates"]):
+            matched = [p for p in matched if "dubai" in p["destination"].lower()]
+        elif any(word in lower_message for word in ["bhutan", "himalayan"]):
+            matched = [p for p in matched if "bhutan" in p["destination"].lower()]
+        elif any(word in lower_message for word in ["ladakh", "leh"]):
+            matched = [p for p in matched if "ladakh" in p["destination"].lower()]
+        elif any(word in lower_message for word in ["kerala", "backwater", "houseboat"]):
+            matched = [p for p in matched if "kerala" in p["destination"].lower()]
+        elif any(word in lower_message for word in ["rajasthan", "jaipur", "udaipur", "jodhpur", "palace", "fort"]):
+            matched = [p for p in matched if "rajasthan" in p["destination"].lower()]
+        elif any(word in lower_message for word in ["himachal", "manali", "shimla", "dharamshala"]):
+            matched = [p for p in matched if "himachal" in p["destination"].lower()]
+        elif any(word in lower_message for word in ["northeast", "assam", "meghalaya", "arunachal"]):
+            matched = [p for p in matched if "northeast" in p["destination"].lower()]
         
-        # Filter by budget
+        # Filter by vibe/type if no destination match
+        if len(matched) == len(MOCK_PACKAGES):
+            if any(word in lower_message for word in ["beach", "water", "backwater", "cruise"]):
+                matched = [p for p in matched if any(kw in p["description"].lower() 
+                          for kw in ["backwater", "cruise", "houseboat"])]
+            elif any(word in lower_message for word in ["city", "urban", "luxury", "shopping"]):
+                matched = [p for p in matched if any(kw in p["description"].lower()
+                          for kw in ["city", "luxury", "shopping", "dubai"])]
+            elif any(word in lower_message for word in ["adventure", "mountain", "trek", "high-altitude"]):
+                matched = [p for p in matched if any(kw in p["description"].lower()
+                          for kw in ["adventure", "mountain", "trek", "high-altitude"])]
+            elif any(word in lower_message for word in ["romantic", "honeymoon", "couple"]):
+                matched = [p for p in matched if "Couples" in str(p.get("suitable_for", []))]
+            elif any(word in lower_message for word in ["cultural", "heritage", "history", "palace"]):
+                matched = [p for p in matched if any(kw in p["description"].lower()
+                          for kw in ["cultural", "heritage", "history", "palace", "fort"])]
+            elif any(word in lower_message for word in ["nature", "serene", "peaceful"]):
+                matched = [p for p in matched if any(kw in p["description"].lower()
+                          for kw in ["serene", "nature", "peaceful"])]
+            elif any(word in lower_message for word in ["family", "kids", "children"]):
+                matched = [p for p in matched if "Families" in str(p.get("suitable_for", []))]
+            elif any(word in lower_message for word in ["solo", "alone", "backpack"]):
+                matched = [p for p in matched if "Solo" in str(p.get("suitable_for", []))]
+        
+        # Filter by budget (₹ or INR)
         import re
-        budget_match = re.search(r'(?:\$|under|budget|around|up to)\s*(\d+)', lower_message)
+        budget_match = re.search(r'(?:₹|rupees?|inr|under|budget|around|up to)\s*(\d+)', lower_message)
         if budget_match:
             budget = int(budget_match.group(1))
             matched = [p for p in matched if p["price"] <= budget]
-        
-        # Filter by destination
-        dest_match = re.search(r'(?:to|visit|go to|travel to|see)\s+([a-z\s]+?)(?:\s+in|\s+for|$)', lower_message)
-        if dest_match:
-            dest = dest_match.group(1).strip()
-            if dest:
-                matched = [p for p in matched if dest in p["destination"].lower() or dest in p["name"].lower()]
         
         return matched[:3]  # Return max 3 packages
 
@@ -185,24 +213,27 @@ class ChatbotService:
             ])
         
         # System prompt
-        system_prompt = f"""You are Tripscape's AI Trip Guide, a friendly and knowledgeable travel assistant. Your role is to:
+        system_prompt = f"""You are Tripscape's AI Trip Guide, a friendly and knowledgeable travel assistant specializing in Indian and international packages. Your role is to:
 
-1. Help users plan their dream trips by understanding their preferences (destination, dates, travelers, budget, vibe).
-2. Suggest relevant travel packages from our collection based on their needs.
-3. Parse user messages to extract: destination, dates, number of travelers, budget, and preferences.
-4. Provide warm, personalized recommendations with enthusiasm.
-5. When suggesting packages, briefly highlight why they're a great fit.
-6. If the user asks for an agent or needs complex help, acknowledge and offer to connect them.
-7. Keep responses concise and conversational (2-3 sentences max, unless listing packages).
+1. Help users plan their dream trips by understanding their preferences (destination, dates, travelers, budget in ₹, vibe).
+2. Suggest relevant packages from Tripscape's collection (Dubai, Bhutan, Ladakh, Kerala, Rajasthan, Himachal, Northeast India).
+3. All prices are per person (twin-sharing basis) in Indian Rupees (₹).
+4. Parse user messages to extract: destination, dates, number of travelers, budget, and preferences.
+5. Provide warm, personalized recommendations with enthusiasm.
+6. When suggesting packages, briefly highlight why they're a great fit (e.g., "Dubai Escape is perfect for families with city tours and desert safaris").
+7. If the user asks for an agent, offer to connect them to chat@tripscape.com.
+8. Keep responses concise and conversational (2-3 sentences max, unless listing packages).
+9. Packages range from ₹25,999 (Bhutan Bliss) to ₹95,999 (Dubai Escape).
+10. Mention key features like duration, inclusions (hotels, meals, tours), and suitability (couples, families, adventure seekers).
 
 Knowledge Base Context:
-{kb_context or "No additional context available."}
+{kb_context or "Tripscape offers 7 curated packages: Dubai Escape, Bhutan Bliss, Ladakh Adventure, Kerala Backwaters, Rajasthan Royals, Himachal Hill Retreat, Northeast Wonders."}
 {package_context}
 {conv_context}
 
 User's latest message: {message}
 
-Respond naturally as the AI Trip Guide. If you're suggesting packages, mention them by name and be enthusiastic!"""
+Respond naturally as the AI Trip Guide. If suggesting packages, mention them by name with prices (e.g., "Exotic Dubai Escape - ₹95,999"). Be enthusiastic and helpful!"""
         
         try:
             # Prepare the request for Claude 3 Sonnet
@@ -242,25 +273,32 @@ Respond naturally as the AI Trip Guide. If you're suggesting packages, mention t
         lower_message = message.lower()
         
         if any(word in lower_message for word in ["agent", "help", "talk to someone", "human"]):
-            return "I'd be happy to connect you with one of our travel experts! They can provide personalized assistance. Would you like me to transfer you?"
+            return "I'd be happy to connect you with one of our travel experts at chat@tripscape.com! They can provide personalized assistance. Would you like me to transfer you?"
         
         if packages:
             pkg_names = ", ".join([p["name"] for p in packages[:2]])
-            return f"Great choice! I found {len(packages)} amazing package{'s' if len(packages) > 1 else ''} for you, including {pkg_names}. Check out the options below—each one is handpicked to make your trip unforgettable! ✨"
+            prices = " starting from ₹" + "{:,}".format(min(p["price"] for p in packages))
+            return f"Perfect! I found {len(packages)} amazing package{'s' if len(packages) > 1 else ''} for you, including {pkg_names}{prices}. Check out the details below—each package is curated for an unforgettable experience! ✨"
         
-        if any(word in lower_message for word in ["beach", "ocean", "tropical", "island"]):
-            return "Beach vibes! 🏖️ I love it. Are you thinking tropical paradise like Bali or Maldives, or maybe a Mediterranean escape? Also, what's your rough budget and when are you looking to travel?"
+        if any(word in lower_message for word in ["dubai", "uae"]):
+            return "Dubai is spectacular! ✨ Our Exotic Dubai Escape (₹95,999) includes desert safaris, Burj Khalifa, and luxury shopping. Perfect for families and couples. When are you planning to visit?"
         
-        if any(word in lower_message for word in ["city", "urban", "metropolitan"]):
-            return "City exploration—awesome! 🌆 Do you prefer historic European cities, vibrant Asian metropolises like Tokyo, or modern marvels like Dubai? Let me know your dates and group size!"
+        if any(word in lower_message for word in ["beach", "water", "backwater"]):
+            return "Love the water! �️ Kerala Backwaters package (₹28,500) offers houseboat cruises, Ayurvedic spas, and serene landscapes. Perfect for a romantic getaway. Interested?"
         
-        if any(word in lower_message for word in ["adventure", "active", "hiking", "safari"]):
-            return "Adventure awaits! 🏔️ Thinking safari in Kenya, skiing in Swiss Alps, or mountain trekking? Tell me your preferred destination, travel dates, and how many adventurers are joining!"
+        if any(word in lower_message for word in ["mountain", "adventure", "trek"]):
+            return "Adventure awaits! 🏔️ We have Ladakh Adventure (₹45,000) for high-altitude thrills or Himachal Hill Retreat (₹35,000) for snow-capped beauty. Which sounds exciting to you?"
         
-        if any(word in lower_message for word in ["romantic", "honeymoon", "couple", "anniversary"]):
-            return "How romantic! 💕 Perfect for a honeymoon or couples getaway. Are you dreaming of Maldives overwater villas, Santorini sunsets, or Bali's tropical romance? What's your budget and travel timeframe?"
+        if any(word in lower_message for word in ["romantic", "honeymoon", "couple"]):
+            return "How romantic! 💕 Kerala Backwaters (₹28,500) is perfect with houseboat stays, or try Himachal Hill Retreat (₹35,000) for mountain romance. What's your budget and preferred dates?"
         
-        return "Tell me more about your ideal trip! What's your destination, travel dates, group size, and budget? The more I know, the better I can help you find the perfect package! 🌍✈️"
+        if any(word in lower_message for word in ["cultural", "heritage", "history"]):
+            return "History lover! 🏰 Rajasthan Royals (₹55,000) takes you through Jaipur's palaces, Udaipur's forts, and Jodhpur's heritage. Or explore Bhutan's serene culture (₹25,999). Which interests you?"
+        
+        if any(word in lower_message for word in ["family", "kids"]):
+            return "Family trip! 👨‍👩‍👧‍👦 Dubai Escape (₹95,999), Kerala Backwaters (₹28,500), or Rajasthan Royals (₹55,000) are all family-friendly. What's your budget and how many travelers?"
+        
+        return "Welcome to Tripscape! 🌍 I can help you find the perfect Indian or international holiday package. Tell me: What's your destination preference, budget (in ₹), travel dates, and group size? We have packages from ₹25,999 to ₹95,999!"
 
     def extract_form_data(self, message: str) -> Optional[Dict[str, any]]:
         """Extract form data from user message"""

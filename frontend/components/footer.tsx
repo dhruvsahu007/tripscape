@@ -27,27 +27,27 @@ export default function Footer() {
             <ul className="mt-4 space-y-2 text-sm">
               <li>
                 <Link href="#" className="text-muted-foreground hover:text-rose-600">
-                  Mumbai
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-rose-600">
-                  Delhi
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-rose-600">
-                  Jaipur
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-rose-600">
-                  Goa
+                  Dubai
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-muted-foreground hover:text-rose-600">
                   Kerala
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="text-muted-foreground hover:text-rose-600">
+                  Ladakh
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="text-muted-foreground hover:text-rose-600">
+                  Rajasthan
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="text-muted-foreground hover:text-rose-600">
+                  Bhutan
                 </Link>
               </li>
             </ul>
