@@ -10,9 +10,9 @@ export default function Header() {
           <Image 
             src="/logo.png" 
             alt="Tripscape Logo" 
-            width={48} 
-            height={48}
-            className="h-12 w-12"
+            width={64} 
+            height={64}
+            className="h-16 w-16"
           />
           <span className="text-xl font-bold">Tripscape</span>
         </Link>
