@@ -1,0 +1,121 @@
+Tripscape Travel Packages Knowledge Base Document
+Document Title: Tripscape Tour Packages Catalog
+Version: 1.0
+Date: October 29, 2025
+Purpose: This document serves as a knowledge base for the Tripscape AI Chatbot, detailing holiday packages, inclusions, exclusions, and FAQs. Upload as PDF to S3 for Bedrock KB ingestion to enable RAG queries (e.g., "Suggest Dubai family trip").
+
+Overview
+Tripscape specializes in curated holiday packages for youth, families, and adventurers. Inspired by Dasa Holidays, we offer seamless bookings with flights, hotels, and tours. All prices are per person (twin-sharing basis) and subject to availability. Contact: chat@tripscape.com.
+
+Tour Packages
+1. Exotic Dubai Escape
+Destination: Dubai, UAE
+Duration: 5 Nights / 6 Days
+Price: ₹95,999 per person
+Description: Discover the glitz and glamour of Dubai with desert safaris, Burj Khalifa visits, and luxury shopping. Perfect for urban explorers.
+Inclusions:
+Return flights from major Indian cities
+5 nights in 4-star hotel
+Daily breakfast and dinner
+Visa assistance
+City tours and desert safari
+Exclusions:
+Personal expenses
+Travel insurance
+Optional activities
+Suitable For: Couples, Families, Youth
+2. Bhutan Bliss Tour
+Destination: Bhutan
+Duration: 6 Nights / 7 Days
+Price: ₹25,999 per adult
+Description: Explore serene landscapes with visits to Thimphu, Paro, and Phuntsholing. Fixed departure: Nov 2, 2025. Ideal for cultural immersion.
+Inclusions:
+Accommodation in 3-star hotels
+All meals
+Guided sightseeing
+Entry fees
+Transport
+Exclusions:
+Airfare
+Personal shopping
+Suitable For: Solo Travelers, Families
+3. Ladakh Adventure
+Destination: Ladakh, India
+Duration: 7 Nights / 8 Days
+Price: ₹45,000 per person
+Description: High-altitude thrills in Leh with Pangong Lake, Nubra Valley, and monastery tours. For thrill-seekers.
+Inclusions:
+Accommodation
+Meals
+Inner line permits
+Sightseeing by 4x4 vehicles
+Exclusions:
+Airfare to Leh
+Oxygen cylinder
+Suitable For: Adventure Seekers, Youth
+4. Kerala Backwaters
+Destination: Kerala, India
+Duration: 4 Nights / 5 Days
+Price: ₹28,500 per person
+Description: Relax in God's Own Country with houseboat cruises, Ayurvedic spas, and wildlife sanctuaries. Romantic getaway spot.
+Inclusions:
+Houseboat stay
+Hotel accommodation
+Meals
+Houseboat cruise
+Exclusions:
+Alcohol
+Laundry
+Suitable For: Couples, Families
+5. Rajasthan Royals
+Destination: Rajasthan, India
+Duration: 8 Nights / 9 Days
+Price: ₹55,000 per person
+Description: Journey through palaces and forts of Jaipur, Udaipur, and Jodhpur. History and heritage focus.
+Inclusions:
+Heritage hotel stays
+All meals
+Guided tours
+Train transfers
+Exclusions:
+Camel rides
+Shopping
+Suitable For: History Buffs, Families
+6. Himachal Hill Retreat
+Destination: Himachal Pradesh, India
+Duration: 6 Nights / 7 Days
+Price: ₹35,000 per person
+Description: Snow-capped mountains and apple orchards in Manali, Shimla, and Dharamshala. Nature escape.
+Inclusions:
+Accommodation in hill resorts
+Meals
+Local transfers
+Exclusions:
+Adventure activities like paragliding
+Suitable For: Nature Lovers, Couples
+7. Northeast Wonders
+Destination: Northeast India
+Duration: 9 Nights / 10 Days
+Price: ₹60,000 per person
+Description: Vibrant cultures and tea gardens in Assam, Meghalaya, and Arunachal Pradesh. Offbeat exploration.
+Inclusions:
+Luxury camps
+Meals
+Tribal village visits
+Exclusions:
+Permit fees for restricted areas
+Suitable For: Explorers, Groups
+
+Frequently Asked Questions (FAQs)
+What documents are needed for international trips? Valid passport, visa (if required), travel insurance, and booking confirmation.
+How to customize a package? Contact our team via chat or email to tailor destinations, duration, and activities.
+What if I need to cancel? Cancellation policy: 30 days full refund minus processing fee; closer dates have partial refunds.
+Are flights included in all packages? Most international packages include flights; domestic vary—check specifics.
+Is there support for solo female travelers? Yes, we offer women-only groups and safety-focused itineraries.
+
+General Information
+Company: Tripscape (Inspired by Dasa Holidays)
+Focus: Youth and family travel packages
+Contact: chat@tripscape.com
+Terms: Prices valid until Dec 31, 2025. GST extra. Book via website or AI chatbot.
+

@@ -1,11 +1,25 @@
 "use client"
 
 import Image from "next/image"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { MapPin, Calendar, Users, Plane } from "lucide-react"
+import AIChatbot, { AIChatTeaser } from "./ai-chatbot"
 
 export default function Hero() {
+  const [searchData, setSearchData] = useState({
+    dest: "",
+    date: "",
+    travelers: 1,
+  })
+
+  const handleFormFill = (data: { dest: string; date: string; travelers: number }) => {
+    setSearchData(data)
+    // You can add logic here to auto-populate the search form
+    console.log("Auto-fill data:", data)
+  }
+
   return (
     <section className="relative">
       <div className="absolute inset-0 z-10 bg-black/40" />
@@ -114,6 +128,9 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* AI Chatbot Widget */}
+      <AIChatbot onFormFill={handleFormFill} />
     </section>
   )
 }
