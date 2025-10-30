@@ -39,13 +39,11 @@ export default function AIChatbot({ onFormFill }: AIChatbotProps) {
   const [conversationCount, setConversationCount] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
   const inactivityTimeoutRef = useRef<NodeJS.Timeout>()
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  // Show bubble with fade-in after 3s
+  // Show bubble immediately on mount
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowBubble(true)
-    }, 3000)
-    return () => clearTimeout(timer)
+    setShowBubble(true)
   }, [])
 
   // Auto-minimize after 2min inactivity
@@ -76,6 +74,10 @@ export default function AIChatbot({ onFormFill }: AIChatbotProps) {
         timestamp: new Date(),
       }
       setMessages([greetingMessage])
+      // Auto-focus input when chat opens
+      setTimeout(() => {
+        inputRef.current?.focus()
+      }, 100)
     }
   }, [isOpen])
 
@@ -145,6 +147,11 @@ export default function AIChatbot({ onFormFill }: AIChatbotProps) {
       if (data.formData && onFormFill) {
         onFormFill(data.formData)
       }
+
+      // Auto-focus input after bot responds
+      setTimeout(() => {
+        inputRef.current?.focus()
+      }, 100)
 
       // Escalate to agent after 5 exchanges
       if (conversationCount >= 4) {
@@ -352,6 +359,7 @@ export default function AIChatbot({ onFormFill }: AIChatbotProps) {
                 <div className="border-t p-4">
                   <div className="flex gap-2">
                     <Input
+                      ref={inputRef}
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={handleKeyPress}
@@ -368,9 +376,6 @@ export default function AIChatbot({ onFormFill }: AIChatbotProps) {
                       <Send className="h-4 w-4" />
                     </Button>
                   </div>
-                  <p className="text-xs text-gray-500 mt-2 text-center">
-                    Powered by AWS Bedrock AI
-                  </p>
                 </div>
               </>
             )}

@@ -143,8 +143,31 @@ class ChatbotService:
         return ""
 
     def match_packages(self, message: str) -> List[Dict]:
-        """Match packages based on user message"""
+        """Match packages based on user message - only return if explicitly requested"""
         lower_message = message.lower()
+        matched = []
+        
+        # Only show packages if user is asking about packages, destinations, or specific travel queries
+        package_intent_keywords = [
+            "package", "packages", "show", "suggest", "recommend", "looking for",
+            "want to", "planning", "trip", "tour", "vacation", "holiday", 
+            "destination", "travel", "visit", "going to", "budget"
+        ]
+        
+        # Check if user is actually asking about packages
+        has_package_intent = any(keyword in lower_message for keyword in package_intent_keywords)
+        
+        # Don't show packages for generic greetings or questions
+        generic_queries = ["hi", "hello", "hey", "what are you", "who are you", "help", "thanks", "thank you"]
+        is_generic = any(lower_message.strip() == query or lower_message.strip() == query + "?" for query in generic_queries)
+        
+        if is_generic:
+            return []  # No packages for generic queries
+        
+        if not has_package_intent:
+            return []  # No packages if not asking about travel
+        
+        # Now match packages based on specific criteria
         matched = MOCK_PACKAGES.copy()
         
         # Filter by specific destinations
@@ -176,7 +199,7 @@ class ChatbotService:
                           for kw in ["adventure", "mountain", "trek", "high-altitude"])]
             elif any(word in lower_message for word in ["romantic", "honeymoon", "couple"]):
                 matched = [p for p in matched if "Couples" in str(p.get("suitable_for", []))]
-            elif any(word in lower_message for word in ["cultural", "heritage", "history", "palace"]):
+            elif any(word in lower_message for word in ["cultural", "heritage", "history"]):
                 matched = [p for p in matched if any(kw in p["description"].lower()
                           for kw in ["cultural", "heritage", "history", "palace", "fort"])]
             elif any(word in lower_message for word in ["nature", "serene", "peaceful"]):
@@ -240,8 +263,9 @@ User's latest message: {message}
 Respond naturally as the AI Trip Guide. If suggesting packages, mention them by name with prices (e.g., "Exotic Dubai Escape - ₹95,999"). Be enthusiastic and helpful!"""
         
         try:
-            # Prepare the request for Claude Sonnet 4 (latest model)
-            model_id = "anthropic.claude-sonnet-4-20250514-v1:0"
+            # Use Claude 3 Haiku - fast, cost-effective, and supports on-demand invocation
+            # Claude 3.5 Sonnet and Claude 4 require inference profiles
+            model_id = "anthropic.claude-3-haiku-20240307-v1:0"
             
             request_body = {
                 "anthropic_version": "bedrock-2023-05-31",

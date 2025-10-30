@@ -3,11 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from dotenv import load_dotenv
+
+# Load environment variables FIRST before importing config
+load_dotenv()
+
 from config import settings
 from routers import chat, agent
-
-# Load environment variables
-load_dotenv()
 
 # Create FastAPI app with conditional docs
 app = FastAPI(
