@@ -100,6 +100,7 @@ class ChatbotService:
         
         # Initialize Bedrock clients if credentials are available
         try:
+            print(f"Initializing AWS Bedrock in region: {self.aws_region}")
             self.bedrock_runtime = boto3.client(
                 service_name="bedrock-runtime",
                 region_name=self.aws_region,
@@ -109,8 +110,11 @@ class ChatbotService:
                 region_name=self.aws_region,
             )
             self.aws_enabled = True
+            print(f"✅ AWS Bedrock initialized successfully. KB ID: {self.kb_id}")
         except Exception as e:
-            print(f"AWS Bedrock not configured: {e}")
+            print(f"❌ AWS Bedrock not configured: {e}")
+            import traceback
+            traceback.print_exc()
             self.aws_enabled = False
 
     def retrieve_from_kb(self, query: str) -> str:
@@ -261,11 +265,20 @@ Respond naturally as the AI Trip Guide. If suggesting packages, mention them by 
             response_body = json.loads(response["body"].read())
             
             if "content" in response_body and len(response_body["content"]) > 0:
-                return response_body["content"][0].get("text", self._generate_fallback_response(message, packages))
+                ai_response = response_body["content"][0].get("text", "")
+                print(f"✅ AWS Bedrock response received: {ai_response[:100]}...")
+                return ai_response if ai_response else self._generate_fallback_response(message, packages)
             
         except ClientError as e:
-            print(f"Bedrock invocation error: {e}")
+            print(f"❌ Bedrock invocation error: {e}")
+            import traceback
+            traceback.print_exc()
+        except Exception as e:
+            print(f"❌ Unexpected error in invoke_claude: {e}")
+            import traceback
+            traceback.print_exc()
         
+        print("⚠️ Using fallback response (AWS Bedrock not available)")
         return self._generate_fallback_response(message, packages)
 
     def _generate_fallback_response(self, message: str, packages: List[Dict]) -> str:
