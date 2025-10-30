@@ -236,8 +236,8 @@ User's latest message: {message}
 Respond naturally as the AI Trip Guide. If suggesting packages, mention them by name with prices (e.g., "Exotic Dubai Escape - ₹95,999"). Be enthusiastic and helpful!"""
         
         try:
-            # Prepare the request for Claude 3 Sonnet
-            model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
+            # Prepare the request for Claude Sonnet 4 (latest model)
+            model_id = "anthropic.claude-sonnet-4-20250514-v1:0"
             
             request_body = {
                 "anthropic_version": "bedrock-2023-05-31",
