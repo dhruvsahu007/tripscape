@@ -39,7 +39,8 @@ export default function AgentDashboard() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8000/api/agent/ws/agent")
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8000"
+    const ws = new WebSocket(`${wsUrl}/api/agent/ws/agent`)
     ws.onopen = () => setConnected(true)
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data)
@@ -52,8 +53,16 @@ export default function AgentDashboard() {
       } else if (data.type === "customer_message") {
         setActiveChats((prev) => {
           const newChats = new Map(prev)
-          const chat = newChats.get(data.customer_id) || { customer_id: data.customer_id, customer_name: data.customer_name, messages: [] }
-          chat.messages.push({ sender: "customer", message: data.message, timestamp: data.timestamp })
+          const chat = newChats.get(data.customer_id) || { 
+            customer_id: data.customer_id, 
+            customer_name: data.customer_name, 
+            messages: [] as Message[]
+          }
+          chat.messages.push({ 
+            sender: "customer", 
+            message: data.message, 
+            timestamp: data.timestamp 
+          })
           newChats.set(data.customer_id, chat)
           return newChats
         })

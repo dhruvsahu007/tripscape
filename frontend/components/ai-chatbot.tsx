@@ -191,9 +191,27 @@ export default function AIChatbot({ onFormFill }: AIChatbotProps) {
       timestamp: new Date(),
     }
     setMessages((prev) => [...prev, agentMessage])
-    // Trigger handoff (e.g., Intercom, Zendesk, etc.)
-    if (typeof window !== "undefined" && (window as any).Intercom) {
-      (window as any).Intercom("show")
+    
+    // Connect to agent via WebSocket
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:8000"
+    const customerId = `customer-${Date.now()}`
+    const ws = new WebSocket(`${wsUrl}/api/agent/ws/customer/${customerId}`)
+    
+    ws.onopen = () => {
+      console.log("Connected to agent system")
+    }
+    
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data)
+      if (data.type === "agent_message") {
+        const agentMsg: Message = {
+          id: Date.now().toString(),
+          text: data.message,
+          sender: "bot",
+          timestamp: new Date(),
+        }
+        setMessages((prev) => [...prev, agentMsg])
+      }
     }
   }
 

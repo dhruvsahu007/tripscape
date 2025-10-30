@@ -4,7 +4,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from dotenv import load_dotenv
 from config import settings
-from routers import chat
+from routers import chat, agent
 
 # Load environment variables
 load_dotenv()
@@ -40,6 +40,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(chat.router)
+app.include_router(agent.router)
 
 @app.get("/")
 async def root():
