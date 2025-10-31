@@ -2,22 +2,51 @@
 
 import Image from "next/image"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { MapPin, Calendar, Users, Plane } from "lucide-react"
 import AIChatbot, { AIChatTeaser } from "./ai-chatbot"
 
+const destinations = [
+  "Dubai, UAE",
+  "Bhutan",
+  "Ladakh, India",
+  "Kerala, India",
+  "Rajasthan, India",
+  "Himachal Pradesh, India",
+  "Northeast India",
+]
+
+const cities = [
+  "Mumbai",
+  "Delhi",
+  "Bangalore",
+  "Chennai",
+  "Kolkata",
+  "Hyderabad",
+  "Jaipur",
+  "Dubai",
+]
+
 export default function Hero() {
+  const router = useRouter()
   const [searchData, setSearchData] = useState({
     dest: "",
     date: "",
-    travelers: 1,
+    travelers: "",
   })
 
   const handleFormFill = (data: { dest: string; date: string; travelers: number }) => {
-    setSearchData(data)
-    // You can add logic here to auto-populate the search form
+    setSearchData({
+      dest: data.dest,
+      date: data.date,
+      travelers: data.travelers.toString(),
+    })
     console.log("Auto-fill data:", data)
+  }
+
+  const handleSearch = () => {
+    router.push('/packages')
   }
 
   return (
@@ -50,78 +79,54 @@ export default function Hero() {
                 <div className="grid gap-4 md:grid-cols-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Destination</label>
-                    <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <MapPin className="mr-2 h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Select destination</span>
-                    </div>
+                    <select
+                      value={searchData.dest}
+                      onChange={(e) => setSearchData({ ...searchData, dest: e.target.value })}
+                      className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      <option value="">Select destination</option>
+                      {destinations.map((dest) => (
+                        <option key={dest} value={dest}>
+                          {dest}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Date</label>
-                    <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <Calendar className="mr-2 h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Select date</span>
-                    </div>
+                    <input
+                      type="date"
+                      value={searchData.date}
+                      onChange={(e) => setSearchData({ ...searchData, date: e.target.value })}
+                      className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Travelers</label>
-                    <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <Users className="mr-2 h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Select travelers</span>
-                    </div>
+                    <select
+                      value={searchData.travelers}
+                      onChange={(e) => setSearchData({ ...searchData, travelers: e.target.value })}
+                      className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      <option value="">Select travelers</option>
+                      {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                        <option key={num} value={num}>
+                          {num} {num === 1 ? "Person" : "People"}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                  <Button className="mt-auto bg-rose-600 hover:bg-rose-700">Search</Button>
+                  <Button onClick={handleSearch} className="mt-auto bg-rose-600 hover:bg-rose-700">Search</Button>
                 </div>
               </TabsContent>
               <TabsContent value="hotels" className="mt-6">
-                <div className="grid gap-4 md:grid-cols-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">City</label>
-                    <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <MapPin className="mr-2 h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Select city</span>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Check-in/Check-out</label>
-                    <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <Calendar className="mr-2 h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Select dates</span>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Rooms & Guests</label>
-                    <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <Users className="mr-2 h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Select rooms</span>
-                    </div>
-                  </div>
-                  <Button className="mt-auto bg-rose-600 hover:bg-rose-700">Search</Button>
+                <div className="flex items-center justify-center py-12">
+                  <p className="text-lg text-muted-foreground">Coming Soon...</p>
                 </div>
               </TabsContent>
               <TabsContent value="flights" className="mt-6">
-                <div className="grid gap-4 md:grid-cols-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Departure</label>
-                    <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <Plane className="mr-2 h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Select city</span>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Destination</label>
-                    <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <MapPin className="mr-2 h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Select city</span>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Date</label>
-                    <div className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                      <Calendar className="mr-2 h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Select date</span>
-                    </div>
-                  </div>
-                  <Button className="mt-auto bg-rose-600 hover:bg-rose-700">Search</Button>
+                <div className="flex items-center justify-center py-12">
+                  <p className="text-lg text-muted-foreground">Coming Soon...</p>
                 </div>
               </TabsContent>
             </Tabs>
