@@ -116,7 +116,7 @@ export default function AgentDashboard() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold">Tripscape Agent Dashboard</h1>
+              <h1 className="text-2xl font-bold">Jetsetwonders Agent Dashboard</h1>
               <Badge variant={connected ? "default" : "destructive"}>
                 {connected ? <CheckCircle className="h-3 w-3 mr-1" /> : <XCircle className="h-3 w-3 mr-1" />}
                 {connected ? "Connected" : "Disconnected"}

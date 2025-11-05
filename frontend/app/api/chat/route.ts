@@ -176,7 +176,7 @@ export async function POST(req: NextRequest) {
         : ""
 
     // Step 4: Create prompt for Claude
-    const systemPrompt = `You are Tripscape's AI Trip Guide, a friendly and knowledgeable travel assistant. Your role is to:
+    const systemPrompt = `You are Jetsetwonders's AI Trip Guide, a friendly and knowledgeable travel assistant. Your role is to:
 
 1. Help users plan their dream trips by understanding their preferences (destination, dates, travelers, budget, vibe).
 2. Suggest relevant travel packages from our collection based on their needs.

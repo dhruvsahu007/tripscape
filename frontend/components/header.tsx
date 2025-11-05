@@ -9,12 +9,12 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2">
           <Image 
             src="/logo.png" 
-            alt="Tripscape Logo" 
+            alt="Jetsetwonders Logo" 
             width={64} 
             height={64}
             className="h-16 w-16"
           />
-          <span className="text-xl font-bold">Tripscape</span>
+          <span className="text-xl font-bold">Jetsetwonders</span>
         </Link>
         <nav className="hidden md:flex gap-6">
           <Link href="/#destinations" className="text-sm font-medium transition-colors hover:text-rose-600">

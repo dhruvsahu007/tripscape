@@ -10,12 +10,12 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <Image 
                 src="/logo.png" 
-                alt="Tripscape Logo" 
+                alt="Jetsetwonders Logo" 
                 width={56} 
                 height={56}
                 className="h-14 w-14"
               />
-              <span className="text-xl font-bold">Tripscape</span>
+              <span className="text-xl font-bold">Jetsetwonders</span>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
               Providing comprehensive travel information and services to make your journey more convenient and
@@ -150,7 +150,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 border-t pt-6 text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Tripscape. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Jetsetwonders. All rights reserved.</p>
         </div>
       </div>
     </footer>
