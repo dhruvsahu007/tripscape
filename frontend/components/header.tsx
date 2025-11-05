@@ -14,7 +14,7 @@ export default function Header() {
             height={64}
             className="h-16 w-16"
           />
-          <span className="text-xl font-bold">Jetsetwonders</span>
+          <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-rose-600 bg-clip-text text-transparent tracking-wide">Jetsetwonders</span>
         </Link>
         <nav className="hidden md:flex gap-6">
           <Link href="/#destinations" className="text-sm font-medium transition-colors hover:text-rose-600">
