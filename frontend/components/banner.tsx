@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
 export default function Banner() {
@@ -11,18 +12,22 @@ export default function Banner() {
               Special Offer
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Summer Sale - Up to 30% Off
+              Winter Sale - Up to 30% Off
             </h2>
             <p className="text-lg text-muted-foreground mb-6">
               Book your dream vacation now and save big on selected destinations. Limited time offer!
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-rose-600 hover:bg-rose-700">
-                Book Now
-              </Button>
-              <Button size="lg" variant="outline">
-                View Deals
-              </Button>
+              <Link href="/packages">
+                <Button size="lg" className="bg-rose-600 hover:bg-rose-700">
+                  Book Now
+                </Button>
+              </Link>
+              <Link href="/packages">
+                <Button size="lg" variant="outline">
+                  View Deals
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="md:w-1/2 relative h-64 md:h-96 w-full">

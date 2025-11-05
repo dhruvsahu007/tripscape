@@ -14,7 +14,7 @@ export default function Header() {
             height={64}
             className="h-16 w-16"
           />
-          <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-rose-600 bg-clip-text text-transparent tracking-wide">Jetsetwonders</span>
+          <span className="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-blue-600 to-teal-600 bg-clip-text text-transparent tracking-wide">Jetsetwonders</span>
         </Link>
         <nav className="hidden md:flex gap-6">
           <Link href="/#destinations" className="text-sm font-medium transition-colors hover:text-rose-600">
@@ -34,12 +34,11 @@ export default function Header() {
           </Link>
         </nav>
         <div className="flex items-center gap-4">
-          <Button variant="outline" size="sm" className="hidden md:flex bg-transparent">
-            Sign In
-          </Button>
-          <Button size="sm" className="bg-rose-600 hover:bg-rose-700">
-            Book Now
-          </Button>
+          <Link href="/#contact">
+            <Button size="sm" className="bg-rose-600 hover:bg-rose-700">
+              Book Now
+            </Button>
+          </Link>
         </div>
       </div>
     </header>
