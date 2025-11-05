@@ -6,8 +6,8 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Tripscape - Your Ultimate Travel Companion",
-  description: "Explore the world's magnificent landscapes and cultural experiences with Tripscape",
+  title: "Jetsetwonders - Your Ultimate Travel Companion",
+  description: "Explore the world's magnificent landscapes and cultural experiences with Jetsetwonders",
   generator: 'v0.app',
   icons: {
     icon: '/logo.png',

@@ -69,7 +69,7 @@ export default function AIChatbot({ onFormFill }: AIChatbotProps) {
     if (isOpen && messages.length === 0) {
       const greetingMessage: Message = {
         id: Date.now().toString(),
-        text: "Hi! 👋 I'm your AI Trip Guide from Tripscape. Let's plan your dream trip! What's your vibe—beaches 🏖️, cities 🌆, or adventure 🏔️? (Or share your dates, group size, and budget!)",
+        text: "Hi! 👋 I'm your AI Trip Guide from Jetsetwonders. Let's plan your dream trip! What's your vibe—beaches 🏖️, cities 🌆, or adventure 🏔️? (Or share your dates, group size, and budget!)",
         sender: "bot",
         timestamp: new Date(),
       }
@@ -267,7 +267,7 @@ export default function AIChatbot({ onFormFill }: AIChatbotProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm">AI Trip Guide</h3>
-                  <p className="text-xs opacity-90">Powered by Tripscape</p>
+                  <p className="text-xs opacity-90">Powered by Jetsetwonders</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
